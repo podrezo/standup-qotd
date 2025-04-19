@@ -1,13 +1,13 @@
 {
   "manifest_version": 3,
-  "name": "Jira QOTD",
+  "name": "Standup QOTD",
   "version": "1.0",
   "description": "Displays a quote of the day when running standup on Jira",
   "permissions": [
     "activeTab"
   ],
   "web_accessible_resources": [{
-    "resources": ["templates/*"],
+    "resources": ["templates/*", "questions.json"],
     "matches": ["*://*.atlassian.net/*"]
   }],
   "content_scripts": [

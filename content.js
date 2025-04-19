@@ -6,44 +6,46 @@ async function loadTemplate() {
   return await response.text();
 }
 
-// Function to check for the element and inject the foobar box
-async function injectFoobarBox() {
+// Function to check for the element and inject the qotd box
+async function injectQotdBox() {
   // Check if the target element exists
   const targetElement = document.querySelector('[data-testid="standups.ui.wrapper"]');
-  const foobarBox = document.querySelector('#jira-qotd');
+  const qotdBox = document.querySelector('#standup-qotd');
 
   if (!targetElement) {
-    // If target element doesn't exist and foobar box exists, remove it
-    if (foobarBox) {
-      foobarBox.remove();
+    // If target element doesn't exist and qotd box exists, remove it
+    if (qotdBox) {
+      qotdBox.remove();
     }
     return;
   }
 
-  // Check if the foobar box already exists
-  if (foobarBox) return;
+  // Check if the qotd box already exists
+  if (qotdBox) return;
 
   // Load the template
   const templateHtml = await loadTemplate();
 
-  // Create the foobar box
-  const newFoobarBox = document.createElement('div');
-  newFoobarBox.setAttribute('id', 'jira-qotd');
-  newFoobarBox.innerHTML = templateHtml;
+  // Create the qotd box
+  const newQotdBox = document.createElement('div');
+  newQotdBox.setAttribute('id', 'standup-qotd');
+  newQotdBox.innerHTML = templateHtml;
 
-  // Example: Set quote and author (you can modify this part based on your needs)
-  newFoobarBox.querySelector('.qotd-question').textContent = 'Pineapple on pizza?';
+  const response = await fetch(chrome.runtime.getURL('questions.json'));
+  const questions = await response.json();
+  const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+  newQotdBox.querySelector('.qotd-question').textContent = randomQuestion;
 
   // Add the box to the page
-  document.body.appendChild(newFoobarBox);
+  document.body.appendChild(newQotdBox);
 }
 
 // Run initially
-injectFoobarBox();
+injectQotdBox();
 
 // Set up a MutationObserver to watch for DOM changes
 const observer = new MutationObserver(() => {
-  injectFoobarBox();
+  injectQotdBox();
 });
 
 // Start observing the document with the configured parameters
