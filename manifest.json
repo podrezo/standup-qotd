@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Jira QOTD",
+  "version": "1.0",
+  "description": "Displays a quote of the day when running standup on Jira",
+  "permissions": [
+    "activeTab"
+  ],
+  "web_accessible_resources": [{
+    "resources": ["templates/*"],
+    "matches": ["*://*.atlassian.net/*"]
+  }],
+  "content_scripts": [
+    {
+      "matches": ["*://*.atlassian.net/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
