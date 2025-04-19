@@ -100,6 +100,12 @@ async function injectQotdBox() {
       displayRandomQuestion(newQotdBox);
     });
 
+    // Add click handler for title to toggle collapsed state
+    newQotdBox.querySelector('.qotd-title').addEventListener('click', () => {
+      const container = newQotdBox.querySelector('.qotd-container');
+      container.classList.toggle('collapsed');
+    });
+
     // Add the box to the page
     document.body.appendChild(newQotdBox);
   } finally {

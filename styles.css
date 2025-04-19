@@ -28,6 +28,26 @@
   text-transform: uppercase;
   font-style: italic;
   margin-bottom: 0.3vh;
+  cursor: pointer;
+  user-select: none;
+}
+
+#standup-qotd .qotd-container .qotd-content {
+  transition: max-height 0.3s ease-out;
+  max-height: 500px;
+  overflow: hidden;
+}
+
+#standup-qotd .qotd-container .qotd-title .collapse-indicator {
+  display: none;
+  color: #777;
+}
+#standup-qotd .qotd-container.collapsed .qotd-title .collapse-indicator {
+  display: inline;
+}
+
+#standup-qotd .qotd-container.collapsed .qotd-content {
+  max-height: 0;
 }
 
 #standup-qotd .qotd-container .qotd-actions {
